@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile("test")
 public class DataSourceConfiguration {
 	
 	@Bean
+	@Profile("dev")
 	public DataSource dataSource() {
 		return DataSourceBuilder.create()
 				.driverClassName("org.postgresql.Driver")
-				.url("jdbc:postgresql://localhost:5432/verxbp_test")
+				.url("jdbc:postgresql://localhost:5432/verxbp")
 				.username("postgres")
 				.password("123")
 				.build();
