@@ -4,15 +4,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class Users {
+public class Userr {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String email;
+	@NotEmpty
 	private String password;
+
+	public Userr() {
+	}
+
+	public Userr(String name, String email, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
 
 	public Long getId() {
 		return id;
@@ -62,7 +76,7 @@ public class Users {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		Userr other = (Userr) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
