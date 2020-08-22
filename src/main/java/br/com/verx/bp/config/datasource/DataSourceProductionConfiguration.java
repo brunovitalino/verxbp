@@ -20,32 +20,32 @@ import com.zaxxer.hikari.HikariDataSource;
 @Profile("prod")
 public class DataSourceProductionConfiguration {
 	
-//	@Autowired
-//	private Environment environment;
-	@Value("${spring.datasource.url}")
-	private String dbUrl;
+	@Autowired
+	private Environment environment;
+//	@Value("${spring.datasource.url}")
+//	private String dbUrl;
 	
 	@Bean
 	public DataSource dataSource() throws URISyntaxException {
 		// usr:pw@hst:prt/pth
-//		URI dbUri = new URI(environment.getProperty("DATABASE_URL"));
-//		
-//		System.err.println("dbUri.getHost(): " + dbUri.getHost());
-//		System.err.println("dbUri.getPort(): " + dbUri.getPort());
-//		System.err.println("dbUri.getPath(): " + dbUri.getPath());
-//		System.err.println("dbUri.getUserInfo().split(\":\")[0]: " + dbUri.getUserInfo().split(":")[0]);
-//		System.err.println("dbUri.getUserInfo().split(\":\")[1]: " + dbUri.getUserInfo().split(":")[1]);
-//		
-//		return DataSourceBuilder.create()
-//				.driverClassName("org.postgresql.Driver")
-//				.url("jdbc:postgresql://"+dbUri.getHost()+":"+dbUri.getPort()+dbUri.getPath())
-//				.username(dbUri.getUserInfo().split(":")[0])
-//				.password(dbUri.getUserInfo().split(":")[1])
-//				.build();
+		URI dbUri = new URI(environment.getProperty("DATABASE_URL"));
 		
-		HikariConfig config = new HikariConfig();
-		config.setJdbcUrl(dbUrl);
-		return new HikariDataSource(config);
+		System.err.println("dbUri.getHost(): " + dbUri.getHost());
+		System.err.println("dbUri.getPort(): " + dbUri.getPort());
+		System.err.println("dbUri.getPath(): " + dbUri.getPath());
+		System.err.println("dbUri.getUserInfo().split(\":\")[0]: " + dbUri.getUserInfo().split(":")[0]);
+		System.err.println("dbUri.getUserInfo().split(\":\")[1]: " + dbUri.getUserInfo().split(":")[1]);
+		
+		return DataSourceBuilder.create()
+				.driverClassName("org.postgresql.Driver")
+				.url("jdbc:postgresql://"+dbUri.getHost()+":"+dbUri.getPort()+dbUri.getPath())
+				.username(dbUri.getUserInfo().split(":")[0])
+				.password(dbUri.getUserInfo().split(":")[1])
+				.build();
+		
+//		HikariConfig config = new HikariConfig();
+//		config.setJdbcUrl(dbUrl);
+//		return new HikariDataSource(config);
 	}
 	
 }
