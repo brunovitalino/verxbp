@@ -31,8 +31,9 @@ public class ConfigurationController {
 	@GetMapping("configdb")
 	@ResponseBody
 	public String configDatabase() {
-		Optional<Userr> userOptional = usersRepository.findByEmail("admin@verx.com.br");
-		if (userOptional.isEmpty()) {
+		Userr user = usersRepository.findByEmail("admin@verx.com.br");
+		System.err.println("user: " + user);
+		if (user == null) {
 			usersRepository.save(new Userr("Administrator", "admin@verx.com.br", "verx123"));
 			return "Banco de dados preenchido!";
 		} else {
