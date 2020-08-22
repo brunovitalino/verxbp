@@ -1,12 +1,11 @@
 package br.com.verx.bp.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.verx.bp.model.Userr;
 import br.com.verx.bp.repository.UserrRepository;
@@ -18,17 +17,18 @@ public class ConfigurationController {
 	UserrRepository usersRepository;
 
 	@GetMapping("/")
+	public RedirectView barra(RedirectAttributes attributes) {
+        attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
+        return new RedirectView("status");
+	}
+
+	@GetMapping("/status")
+	@ResponseBody
 	public String status() {
 		return "API online!";
 	}
 
-	@GetMapping("users")
-	@ResponseBody
-	public List<Userr> findAll() {
-		return usersRepository.findAll();
-	}
-
-	@GetMapping("configdb")
+	@GetMapping("/configdb")
 	@ResponseBody
 	public String configDatabase() {
 		Userr user = usersRepository.findByEmail("admin@verx.com.br");
