@@ -6,15 +6,16 @@ A REST API for customer registration.
 
 ## Services
 
-- Add a customer;
-- List one or all customers;
-- Edit a customer;
-- Remove a customer.
+- Customers;
+- Addresses;
+- Cities;
+- States;
+- Areas.
 
 ## Sites
 
 ### Documentation
-xxxxx
+https://verxbp.herokuapp.com/swagger-ui.html
 
 ### Aplication
 https://verxbp.herokuapp.com
