@@ -17,4 +17,4 @@ A REST API for customer registration.
 xxxxx
 
 ### Aplication
-yyyyy
+https://verxbp.herokuapp.com
