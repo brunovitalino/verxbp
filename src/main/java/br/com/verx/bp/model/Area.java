@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 @Entity
 public class Area {
 
@@ -26,6 +26,9 @@ public class Area {
 
 	@OneToMany(mappedBy = "area")
 	private List<Address> addresses;
+
+	public Area() {
+	}
 
 	public Area(@NotBlank String name) {
 		this.name = name;

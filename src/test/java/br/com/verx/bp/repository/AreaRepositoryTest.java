@@ -40,7 +40,7 @@ public class AreaRepositoryTest {
 	void testSuccessFindAllArea() {
 		areaRepository.save(area);
 		List<Area> areas = areaRepository.findAll();
-		assertTrue(areas.stream().findAny().isPresent());
+		assertTrue(areas.size() > 0);
 	}
 
 	@Test
