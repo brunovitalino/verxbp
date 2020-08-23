@@ -1,5 +1,7 @@
 package br.com.verx.bp.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,7 +16,7 @@ import br.com.verx.bp.repository.UserRepository;
 public class ConfigurationController {
 	
 	@Autowired
-	UserRepository usersRepository;
+	private UserRepository usersRepository;
 
 	@GetMapping("/")
 	public RedirectView barra(RedirectAttributes attributes) {
@@ -31,12 +33,11 @@ public class ConfigurationController {
 	@GetMapping("/configdb")
 	@ResponseBody
 	public String configDatabase() {
-		User user = usersRepository.findByEmail("admin@verx.com.br");
-		if (user == null) {
-			usersRepository.save(new User("Administrator", "admin@verx.com.br", "verx123"));
-			return "Banco de dados preenchido!";
-		} else {
+		Optional<User> user = usersRepository.findByEmail("admin@verx.com.br");
+		if (user.isPresent()) {
 			return "Banco de dados já está preenchido!";
 		}
+		usersRepository.save(new User("Administrator", "admin@verx.com.br", "$2a$10$F9PxVWEgzbfRe48zwwDyRek/N/6lq2BZ/utop842rJPrvRsAfS.si"));
+		return "Banco de dados preenchido!";
 	}
 }

@@ -32,7 +32,7 @@ import br.com.verx.bp.service.exception.AreaException;
 public class AreaController {
 
 	@Autowired
-	AreaService areaService;
+	private AreaService areaService;
 
 	@GetMapping
 	public ResponseEntity<List<AreaDto>> findAll(@RequestParam(required = false) String name,

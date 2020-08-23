@@ -23,7 +23,7 @@ public class AreaRepositoryTest {
 	private Area area;
 	
 	@Autowired
-	AreaRepository areaRepository ;
+	private AreaRepository areaRepository;
 	
 	@BeforeEach
 	void beforeEach() {

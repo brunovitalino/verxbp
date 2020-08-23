@@ -8,6 +8,6 @@ import br.com.verx.bp.model.Area;
 
 public interface AreaRepository extends JpaRepository<Area, Long> {
 	
-	public List<Area> findByName(String name);
+	List<Area> findByName(String name);
 
 }

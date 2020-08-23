@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class AreaServiceImpl implements AreaService {
 	
 	@Autowired
-	AreaRepository areaRepository;
+	private AreaRepository areaRepository;
 
 	public AreaServiceImpl(AreaRepository areaRepository) {
 		this.areaRepository = areaRepository;
