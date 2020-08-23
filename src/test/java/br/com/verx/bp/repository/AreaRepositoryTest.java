@@ -67,7 +67,7 @@ public class AreaRepositoryTest {
 		assertTrue(areaOpt.isPresent());
 		areaRepository.delete(objetoRecebido);
 		areaOpt = areaRepository.findById(objetoRecebido.getId());
-		assertTrue(areaOpt.isEmpty());
+		assertTrue(!areaOpt.isPresent());
 	}
 
 }
