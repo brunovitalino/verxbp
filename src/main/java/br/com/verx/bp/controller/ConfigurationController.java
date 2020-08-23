@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import br.com.verx.bp.model.Userr;
-import br.com.verx.bp.repository.UserrRepository;
+import br.com.verx.bp.model.User;
+import br.com.verx.bp.repository.UserRepository;
 
 @Controller
 public class ConfigurationController {
 	
 	@Autowired
-	UserrRepository usersRepository;
+	UserRepository usersRepository;
 
 	@GetMapping("/")
 	public RedirectView barra(RedirectAttributes attributes) {
@@ -31,9 +31,9 @@ public class ConfigurationController {
 	@GetMapping("/configdb")
 	@ResponseBody
 	public String configDatabase() {
-		Userr user = usersRepository.findByEmail("admin@verx.com.br");
+		User user = usersRepository.findByEmail("admin@verx.com.br");
 		if (user == null) {
-			usersRepository.save(new Userr("Administrator", "admin@verx.com.br", "verx123"));
+			usersRepository.save(new User("Administrator", "admin@verx.com.br", "verx123"));
 			return "Banco de dados preenchido!";
 		} else {
 			return "Banco de dados já está preenchido!";

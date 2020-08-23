@@ -3,11 +3,11 @@ package br.com.verx.bp.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.verx.bp.model.Userr;
+import br.com.verx.bp.model.User;
 
 @Repository
-public interface UserrRepository extends JpaRepository<Userr, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 	
-	Userr findByEmail(String email);
+	User findByEmail(String email);
 
 }
