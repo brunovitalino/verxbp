@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.verx.bp.model.Area;
 import br.com.verx.bp.repository.AreaRepository;
@@ -14,6 +15,7 @@ import br.com.verx.bp.service.exception.AreaException;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@Service
 public class AreaServiceImpl implements AreaService {
 	
 	@Autowired
@@ -93,7 +95,7 @@ public class AreaServiceImpl implements AreaService {
 			validateId(id);
 			validateArea(areaNew);
 			Optional<Area> areaOpt = areaRepository.findById(id);
-			if (areaOpt.isPresent())
+			if (!areaOpt.isPresent())
 				return null;
 			updateOldFields(areaNew, areaOpt.get());
 			return areaOpt.get();
