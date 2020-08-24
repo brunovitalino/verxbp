@@ -19,7 +19,7 @@ A REST API for customer registration.
 
 ## Instructions
 
-First you run the application, you should config database accessing the url "[/configdb](https://verxbp.herokuapp.com/configdb)". Then you can enjoy all the available features.
+When you run the application for the first time, you should config database accessing the url "[/configdb](https://verxbp.herokuapp.com/configdb)". Then you can enjoy all the available features.
 
 ### API Credentials  
 
