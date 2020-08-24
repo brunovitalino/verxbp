@@ -23,4 +23,6 @@ First you run the application, you should config database accessing "[/configdb]
 
 ### API Credentials
 + UsrName: admin@verx.com.br
-+ Password: verx123
++ Password: verx123  
+
+You should access "[/auth](https://verxbp.herokuapp.com/auth)" to get your token.
