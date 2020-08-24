@@ -19,10 +19,13 @@ A REST API for customer registration.
 
 ## Instructions
 
-First you run the application, you should config database accessing "[/configdb](https://verxbp.herokuapp.com/configdb)". Then you can enjoy all the available features.
+First you run the application, you should config database accessing the url "[/configdb](https://verxbp.herokuapp.com/configdb)". Then you can enjoy all the available features.
 
-### API Credentials
-+ UsrName: admin@verx.com.br
-+ Password: verx123  
+### API Credentials  
 
-You should access "[/auth](https://verxbp.herokuapp.com/auth)" to get your token.
+To get your token, you should access the url "[/auth](https://verxbp.herokuapp.com/auth)" through POST method with content bellow:  
+
+> {  
+>     email: admin@verx.com.br  
+>     password: verx123  
+> }  
