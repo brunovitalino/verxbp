@@ -73,13 +73,13 @@ public class AreaServiceTest {
 
 	@Test
 	void testSuccessFindOne() {
-		Long idBuscado = 1L;
-		area.setId(idBuscado);
+		Long idTarget = 1L;
+		area.setId(idTarget);
 		Optional<Area> objectToReturn = Optional.ofNullable(area);
-		when(areaRepository.findById(idBuscado)).thenReturn(objectToReturn);
+		when(areaRepository.findById(idTarget)).thenReturn(objectToReturn);
 		Area objectReturned = null;
 		try {
-			objectReturned = areaService.findOne(idBuscado);
+			objectReturned = areaService.findOne(idTarget);
 		} catch (AreaException e) {
 			fail("AreaException should not occur.");
 		}

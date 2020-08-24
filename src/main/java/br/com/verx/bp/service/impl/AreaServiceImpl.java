@@ -27,20 +27,20 @@ public class AreaServiceImpl implements AreaService {
 
 	private void validateArea(Area area) throws AreaException {
 		if (isNullOrEmpty(area)) {
-			throw new AreaException("Parâmetro AREA não foi preenchido.");
+			throw new AreaException("Missing input param AREA.");
 		}
 		validateName(area.getName());
 	}
 
 	private void validateId(Long id) throws AreaException {
 		if (isNullOrEmpty(id)) {
-			throw new AreaException("Parâmetro ID não foi preenchido.");
+			throw new AreaException("Missing input param ID.");
 		}
 	}
 
 	private void validateName(String name) throws AreaException {
 		if (isNullOrEmpty(name)) {
-			throw new AreaException("Parâmetro NOME não foi preenchido.");
+			throw new AreaException("Missing input param NOME.");
 		}
 	}
 
@@ -49,7 +49,7 @@ public class AreaServiceImpl implements AreaService {
 		try {
 			return areaRepository.findAll();
 		} catch (Exception e) {
-			throw new AreaException("Não foi possível buscar todas as areas. " + e.getMessage());
+			throw new AreaException("Não foi possível buscar todos bairros. " + e.getMessage());
 		}
 	}
 
@@ -59,7 +59,7 @@ public class AreaServiceImpl implements AreaService {
 		try {
 			return areaRepository.findByName(name);
 		} catch (Exception e) {
-			throw new AreaException("Não foi possível buscar areas pelo nome. " + e.getMessage());
+			throw new AreaException("Não foi possível buscar bairros pelo nome. " + e.getMessage());
 		}
 	}
 
@@ -70,7 +70,7 @@ public class AreaServiceImpl implements AreaService {
 			Optional<Area> areaOpt = areaRepository.findById(id);
 			return areaOpt.isPresent() ? areaOpt.get() : null;
 		} catch (Exception e) {
-			throw new AreaException("Não foi possível buscar areas pelo id. " + e.getMessage());
+			throw new AreaException("Não foi possível buscar bairros pelo id. " + e.getMessage());
 		}
 	}
 
@@ -80,7 +80,7 @@ public class AreaServiceImpl implements AreaService {
 			validateArea(area);
 			return areaRepository.save(area);
 		} catch (Exception e) {
-			throw new AreaException("Não foi possível salvar. " + e.getMessage());
+			throw new AreaException("Não foi possível salvar bairro. " + e.getMessage());
 		}
 	}
 
@@ -100,7 +100,7 @@ public class AreaServiceImpl implements AreaService {
 			updateOldFields(areaNew, areaOpt.get());
 			return areaOpt.get();
 		} catch (Exception e) {
-			throw new AreaException("Não foi possível atualizar. " + e.getMessage());
+			throw new AreaException("Não foi possível atualizar bairro. " + e.getMessage());
 		}
 	}
 
@@ -114,7 +114,7 @@ public class AreaServiceImpl implements AreaService {
 			areaRepository.delete(areaOpt.get());
 			return true;
 		} catch (Exception e) {
-			throw new AreaException("Não foi possível remover. " + e.getMessage());
+			throw new AreaException("Não foi possível remover bairro. " + e.getMessage());
 		}
 	}
 
