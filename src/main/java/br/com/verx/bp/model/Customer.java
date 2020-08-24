@@ -29,6 +29,9 @@ public class Customer {
 	@OneToMany(mappedBy = "customer")
 	private List<Address> addresses;
 
+	public Customer() {
+	}
+
 	public Customer(@NotBlank String name, @NotNull Long cpf) {
 		this.name = name;
 		this.cpf = cpf;

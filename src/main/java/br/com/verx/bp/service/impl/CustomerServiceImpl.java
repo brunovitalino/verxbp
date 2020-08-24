@@ -30,7 +30,6 @@ public class CustomerServiceImpl implements CustomerService {
 		if (isNullOrEmpty(customer)) {
 			throw new CustomerException("Missing input param CUSTOMER.");
 		}
-		validateName(customer.getName());
 	}
 
 	private void validateId(Long id) throws CustomerException {
@@ -102,7 +101,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 	private void updateOldFields(Customer customerNew, Customer customerOld) {
-		customerOld.setName(customerNew.getName());
+		customerOld.setName(!isNull(customerNew.getName()) ? customerNew.getName() : customerOld.getName());
+		customerOld.setCpf(!isNull(customerNew.getCpf()) ? customerNew.getCpf() : customerOld.getCpf());
 	}
 
 	@Override
