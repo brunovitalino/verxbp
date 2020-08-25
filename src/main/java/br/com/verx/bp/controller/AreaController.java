@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -35,6 +37,7 @@ public class AreaController {
 	private AreaService areaService;
 
 	@GetMapping
+	@Cacheable(value = "findAllAreas")
 	public ResponseEntity<List<AreaDto>> findAll(@RequestParam(required = false) String name,
 			@PageableDefault(sort = "nome", direction = Direction.ASC) Pageable pageable) {
 		try {
@@ -65,6 +68,7 @@ public class AreaController {
 
 	@PostMapping
 	@Transactional
+	@CacheEvict(value = {"findAllAreas"}, allEntries = true)
 	public ResponseEntity<AreaDto> save(@RequestBody @Valid AreaDto areaDto, UriComponentsBuilder uriBuilder) {
 		try {
 			Area area = areaDto.toEntity();
@@ -79,6 +83,7 @@ public class AreaController {
 
 	@PutMapping("/{id}")
 	@Transactional
+	@CacheEvict(value = {"findAllAreas"}, allEntries = true)
 	public ResponseEntity<AreaDto> update(@PathVariable Long id, @RequestBody AreaDto areaDto) {
 		try {
 			Area area = areaService.findOne(id);
@@ -94,6 +99,7 @@ public class AreaController {
 
 	@DeleteMapping("/{id}")
 	@Transactional
+	@CacheEvict(value = {"findAllAreas"}, allEntries = true)
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		try {
 			if (!areaService.delete(id))
