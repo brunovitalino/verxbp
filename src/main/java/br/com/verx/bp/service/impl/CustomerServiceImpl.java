@@ -93,6 +93,8 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer save(Customer customer) throws CustomerException {
 		try {
 			validateCustomer(customer);
+			validateName(customer.getName());
+			validateCpf(customer.getCpf());
 			return customerRepository.save(customer);
 		} catch (Exception e) {
 			throw new CustomerException("Não foi possível salvar cliente. " + e.getMessage());
@@ -101,7 +103,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 	private void updateOldFields(Customer customerNew, Customer customerOld) {
-		customerOld.setName(!isNull(customerNew.getName()) ? customerNew.getName() : customerOld.getName());
+		customerOld.setName(!isNullOrEmpty(customerNew.getName()) ? customerNew.getName() : customerOld.getName());
 		customerOld.setCpf(!isNull(customerNew.getCpf()) ? customerNew.getCpf() : customerOld.getCpf());
 	}
 

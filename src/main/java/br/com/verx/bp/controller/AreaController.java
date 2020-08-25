@@ -79,7 +79,7 @@ public class AreaController {
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<AreaDto> update(@PathVariable Long id, @RequestBody @Valid AreaDto areaDto) {
+	public ResponseEntity<AreaDto> update(@PathVariable Long id, @RequestBody AreaDto areaDto) {
 		try {
 			Area area = areaService.findOne(id);
 			if (area == null)

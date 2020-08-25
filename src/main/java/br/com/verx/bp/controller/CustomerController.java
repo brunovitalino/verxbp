@@ -92,7 +92,7 @@ public class CustomerController {
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<CustomerDto> update(@PathVariable Long id, @RequestBody @Valid CustomerDto customerDto) {
+	public ResponseEntity<CustomerDto> update(@PathVariable Long id, @RequestBody CustomerDto customerDto) {
 		try {
 			Optional<Customer> customerOpt = customerService.findOneById(id);
 			if (!customerOpt.isPresent())

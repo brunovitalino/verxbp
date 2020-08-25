@@ -15,12 +15,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import br.com.verx.bp.model.User;
 import br.com.verx.bp.repository.UserRepository;
 
-public class TokenAuthenticationFilter extends OncePerRequestFilter {
+public class AuthenticationFilter extends OncePerRequestFilter {
 	
 	private TokenService tokenService;
 	private UserRepository userRepository;
 
-	public TokenAuthenticationFilter(TokenService tokenService, UserRepository userRepository) {
+	public AuthenticationFilter(TokenService tokenService, UserRepository userRepository) {
 		this.tokenService = tokenService;
 		this.userRepository = userRepository;
 	}
@@ -46,7 +46,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}
 		}
-		
 		
 		filterChain.doFilter(request, response);
 	}

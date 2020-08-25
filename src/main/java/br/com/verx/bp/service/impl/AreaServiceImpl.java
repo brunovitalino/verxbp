@@ -1,6 +1,5 @@
 package br.com.verx.bp.service.impl;
 
-import static br.com.verx.bp.util.BpUtil.isNull;
 import static br.com.verx.bp.util.BpUtil.isNullOrEmpty;
 
 import java.util.List;
@@ -87,7 +86,7 @@ public class AreaServiceImpl implements AreaService {
 
 
 	private void updateOldFields(Area areaNew, Area areaOld) {
-		areaOld.setName(!isNull(areaNew.getName()) ? areaNew.getName() : areaOld.getName());
+		areaOld.setName(!isNullOrEmpty(areaNew.getName()) ? areaNew.getName() : areaOld.getName());
 	}
 
 	@Override
