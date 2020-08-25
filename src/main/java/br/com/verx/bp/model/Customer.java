@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 //@Data
 //@NoArgsConstructor
@@ -23,8 +23,12 @@ public class Customer {
 	@NotBlank
 	private String name;
 
-	@NotNull @Column(unique = true)
-	private Long cpf;
+	@NotBlank
+	@Column(unique = true)
+//	@Min(value = 99999999999, message = "Cpf should not be greater than 99999999999")
+	// Min/Max validation not working for 11 digits. Cpf type changed from long to string
+	@Size(min = 11, max = 11)
+	private String cpf;
 
 	@OneToMany(mappedBy = "customer")
 	private List<Address> addresses;
@@ -32,22 +36,22 @@ public class Customer {
 	public Customer() {
 	}
 
-	public Customer(@NotBlank String name, @NotNull Long cpf) {
+	public Customer(@NotBlank String name, @NotBlank String cpf) {
 		this.name = name;
 		this.cpf = cpf;
 	}
 
-	public Customer(Long id, @NotBlank String name, @NotNull Long cpf) {
+	public Customer(Long id, @NotBlank String name, @NotBlank String cpf) {
 		this(name, cpf);
 		this.id = id;
 	}
 
-	public Customer(@NotBlank String name, @NotNull Long cpf, List<Address> addresses) {
+	public Customer(@NotBlank String name, @NotBlank String cpf, List<Address> addresses) {
 		this(name, cpf);
 		this.addresses = addresses;
 	}
 
-	public Customer(Long id, @NotBlank String name, @NotNull Long cpf, List<Address> addresses) {
+	public Customer(Long id, @NotBlank String name, @NotBlank String cpf, List<Address> addresses) {
 		this(id, name, cpf);
 		this.addresses = addresses;
 	}
@@ -68,11 +72,11 @@ public class Customer {
 		this.name = name;
 	}
 
-	public Long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 

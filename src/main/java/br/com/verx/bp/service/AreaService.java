@@ -1,41 +1,39 @@
 package br.com.verx.bp.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import br.com.verx.bp.model.Area;
-import br.com.verx.bp.service.exception.AreaException;
 
 public interface AreaService {
 	
 	/**
 	 * Method to find all areas.
 	 */
-	List<Area> findAll() throws AreaException;
+	List<Area> findAll();
 	
 	/**
 	 * Method to find one area by name.
 	 */
-	List<Area> findAllByName(String name) throws AreaException;
+	List<Area> findAllByName(String name);
 	
 	/**
 	 * Method to find one area by primary key.
 	 */
-	Area findOne(Long id) throws AreaException;
+	Area findOne(Long id);
 	
 	/**
-	 * Method para salvar one area.
+	 * Method to save one area.
 	 */
-	Area save(Area area) throws AreaException;
+	Area save(Area area);
 	
 	/**
-	 * Method para atualizar one area.
+	 * Method to update one area.
 	 */
-	Area update(Long id, Area areaNew) throws AreaException;
+	Area update(Long id, Area areaNew);
 	
 	/**
-	 * Method para remover one area.
+	 * Method to remove one area.
 	 */
-	boolean delete(Long id) throws AreaException;
+	boolean delete(Long id);
 
 }

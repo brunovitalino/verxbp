@@ -6,17 +6,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import br.com.verx.bp.model.Customer;;
 
 public class CustomerDto {
 
 	private Long id;
-	@NotBlank
+	
+	@NotBlank//(message = "Name cannot be null or empty")
 	private String name;
-	@NotNull
-	private Long cpf;
+	
+	@NotBlank//(message = "must be 11 digits")
+	@Size(min = 11, max = 11)
+	private String cpf;
 	
 	public CustomerDto() {
 	}
@@ -45,11 +48,11 @@ public class CustomerDto {
 		this.name = name;
 	}
 
-	public Long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 

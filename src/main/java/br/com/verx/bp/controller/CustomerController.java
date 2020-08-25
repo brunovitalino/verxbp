@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +25,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.verx.bp.model.Customer;
 import br.com.verx.bp.model.dto.CustomerDto;
 import br.com.verx.bp.service.CustomerService;
-import br.com.verx.bp.service.exception.CustomerException;
 
 @RestController
 @RequestMapping("/customers")
@@ -37,85 +35,55 @@ public class CustomerController {
 
 	@GetMapping
 	public ResponseEntity<List<CustomerDto>> findAll(@RequestParam(required = false) String name,
-			@PageableDefault(sort = "nome", direction = Direction.ASC) Pageable pageable) {
-		try {
-			List<Customer> customers = null;
-			if (name != null) {
-				customers = customerService.findAllByName(name);
-				return ResponseEntity.ok(CustomerDto.toList(customers));
-			}
-			customers = customerService.findAll();
+			@PageableDefault(sort = "name") Pageable pageable) {
+		List<Customer> customers = null;
+		if (name != null) {
+			customers = customerService.findAllByName(name);
 			return ResponseEntity.ok(CustomerDto.toList(customers));
-		} catch (CustomerException e) {
-			e.printStackTrace();
-			return ResponseEntity.unprocessableEntity().build();
 		}
+		customers = customerService.findAll();
+		return ResponseEntity.ok(CustomerDto.toList(customers));
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<CustomerDto> findOneById(@PathVariable Long id) {
 		Optional<Customer> customer;
-		try {
-			customer = customerService.findOneById(id);
-			return !customer.isPresent() ? ResponseEntity.notFound().build() : ResponseEntity.ok(new CustomerDto(customer.get()));
-		} catch (CustomerException e) {
-			e.printStackTrace();
-			return ResponseEntity.unprocessableEntity().build();
-		}
+		customer = customerService.findOneById(id);
+		return !customer.isPresent() ? ResponseEntity.notFound().build() : ResponseEntity.ok(new CustomerDto(customer.get()));
 	}
 
 	@GetMapping("/cpf/{cpf}")
-	public ResponseEntity<CustomerDto> findOneByCpf(@PathVariable Long cpf) {
+	public ResponseEntity<CustomerDto> findOneByCpf(@PathVariable String cpf) {
 		Optional<Customer> customer;
-		try {
-			customer = customerService.findOneByCpf(cpf);
-			return !customer.isPresent() ? ResponseEntity.notFound().build() : ResponseEntity.ok(new CustomerDto(customer.get()));
-		} catch (CustomerException e) {
-			e.printStackTrace();
-			return ResponseEntity.unprocessableEntity().build();
-		}
+		customer = customerService.findOneByCpf(cpf);
+		return !customer.isPresent() ? ResponseEntity.notFound().build() : ResponseEntity.ok(new CustomerDto(customer.get()));
 	}
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<CustomerDto> save(@RequestBody @Valid CustomerDto customerDto, UriComponentsBuilder uriBuilder) {
-		try {
-			Customer customer = customerDto.toEntity();
-			customerService.save(customer);
-			URI uri = uriBuilder.path("/customers/{id}").buildAndExpand(customer.getId()).toUri();
-			return ResponseEntity.created(uri).body(new CustomerDto(customer));
-		} catch (CustomerException e) {
-			e.printStackTrace();
-			return ResponseEntity.unprocessableEntity().build();
-		}
+	public ResponseEntity<?> save(@RequestBody @Valid CustomerDto customerDto, UriComponentsBuilder uriBuilder) {
+		Customer customer = customerDto.toEntity();
+		customerService.save(customer);
+		URI uri = uriBuilder.path("/customers/{id}").buildAndExpand(customer.getId()).toUri();
+		return ResponseEntity.created(uri).body(new CustomerDto(customer));
 	}
 
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<CustomerDto> update(@PathVariable Long id, @RequestBody CustomerDto customerDto) {
-		try {
-			Optional<Customer> customerOpt = customerService.findOneById(id);
-			if (!customerOpt.isPresent())
-				return ResponseEntity.notFound().build();
-			customerOpt = Optional.ofNullable(customerService.update(id, customerDto.toEntity()));
-			return ResponseEntity.ok(new CustomerDto(customerOpt.get()));
-		} catch (CustomerException e) {
-			e.printStackTrace();
-			return ResponseEntity.unprocessableEntity().build();
-		}
+		Optional<Customer> customerOpt = customerService.findOneById(id);
+		if (!customerOpt.isPresent())
+			return ResponseEntity.notFound().build();
+		customerOpt = Optional.ofNullable(customerService.update(id, customerDto.toEntity()));
+		return ResponseEntity.ok(new CustomerDto(customerOpt.get()));
 	}
 
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-		try {
-			if (!customerService.delete(id))
-				return ResponseEntity.notFound().build();
-			return ResponseEntity.ok().build();
-		} catch (CustomerException e) {
-			e.printStackTrace();
-			return ResponseEntity.unprocessableEntity().build();
-		}
+		if (!customerService.delete(id))
+			return ResponseEntity.notFound().build();
+		return ResponseEntity.ok().build();
 	}
 
 }

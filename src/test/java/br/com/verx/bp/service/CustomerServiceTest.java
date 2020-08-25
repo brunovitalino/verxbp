@@ -17,7 +17,7 @@ import org.mockito.Mockito;
 
 import br.com.verx.bp.model.Customer;
 import br.com.verx.bp.repository.CustomerRepository;
-import br.com.verx.bp.service.exception.CustomerException;
+import br.com.verx.bp.service.exception.DefaultException;
 import br.com.verx.bp.service.impl.CustomerServiceImpl;;
 
 public class CustomerServiceTest {
@@ -33,7 +33,7 @@ public class CustomerServiceTest {
 
 	@BeforeEach
 	void beforeEach() {
-		customer = new Customer("Test", 123L);
+		customer = new Customer("Test", "123");
 	}
 
 	@AfterEach
@@ -49,7 +49,7 @@ public class CustomerServiceTest {
 		List<Customer> objectReturned = null;
 		try {
 			objectReturned = customerService.findAll();
-		} catch (CustomerException e) {
+		} catch (DefaultException e) {
 			fail("CustomerException should not occur.");
 		}
 		assertFalse(isNull(objectReturned));
@@ -64,7 +64,7 @@ public class CustomerServiceTest {
 		List<Customer> objectReturned = null;
 		try {
 			objectReturned = customerService.findAllByName("Test");
-		} catch (CustomerException e) {
+		} catch (DefaultException e) {
 			fail("CustomerException should not occur.");
 		}
 		assertFalse(isNull(objectReturned));
@@ -80,7 +80,7 @@ public class CustomerServiceTest {
 		Optional<Customer> objectReturned = null;
 		try {
 			objectReturned = customerService.findOneById(idTarget);
-		} catch (CustomerException e) {
+		} catch (DefaultException e) {
 			fail("CustomerException should not occur.");
 		}
 		assertTrue(objectReturned.isPresent());
@@ -88,14 +88,14 @@ public class CustomerServiceTest {
 
 	@Test
 	void testSuccessFindOneByCpf() {
-		Long cpfTarget = 321L;
+		String cpfTarget = "321";
 		customer.setCpf(cpfTarget);
 		Optional<Customer> objectToReturn = Optional.ofNullable(customer);
 		when(customerRepository.findByCpf(cpfTarget)).thenReturn(objectToReturn);
 		Optional<Customer> objectReturned = null;
 		try {
 			objectReturned = customerService.findOneByCpf(cpfTarget);
-		} catch (CustomerException e) {
+		} catch (DefaultException e) {
 			fail("CustomerException should not occur.");
 		}
 		assertTrue(objectReturned.isPresent());
@@ -108,7 +108,7 @@ public class CustomerServiceTest {
 		Customer objectReturned = null;
 		try {
 			objectReturned = customerService.save(customer);
-		} catch (CustomerException e) {
+		} catch (DefaultException e) {
 			fail("CustomerException should not occur.");
 		}
 		assertFalse(isNull(objectReturned));
