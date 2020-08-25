@@ -69,7 +69,7 @@ public class CustomerController {
 		Optional<Customer> customer;
 		try {
 			customer = customerService.findOneByCpf(cpf);
-			return customer.isPresent() ? ResponseEntity.notFound().build() : ResponseEntity.ok(new CustomerDto(customer.get()));
+			return !customer.isPresent() ? ResponseEntity.notFound().build() : ResponseEntity.ok(new CustomerDto(customer.get()));
 		} catch (CustomerException e) {
 			e.printStackTrace();
 			return ResponseEntity.unprocessableEntity().build();
