@@ -20,8 +20,8 @@ A REST API for customer registration.
 ## Instructions to run locally
 
 Using Postgres database, you should create two databases: verxdb and verxdb_test
-> user: postgres
-> password: 123
+> user: postgres  
+> password: 123  
 
 When you run the application for the first time, you should config database accessing the url "[/configdb](https://verxbp.herokuapp.com/configdb)". Then you can enjoy all the available features.
 
