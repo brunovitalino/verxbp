@@ -17,7 +17,7 @@ A REST API for customer registration.
 [Application](https://verxbp.herokuapp.com)  
 [Documentation](https://verxbp.herokuapp.com/swagger-ui.html)  
 
-## API Credentials  
+### API Credentials  
 
 To get your token, you should access the url "[/auth](https://verxbp.herokuapp.com/auth)" through POST method with content bellow:  
 
