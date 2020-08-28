@@ -17,7 +17,11 @@ A REST API for customer registration.
 [Documentation](https://verxbp.herokuapp.com/swagger-ui.html)  
 [Application](https://verxbp.herokuapp.com)
 
-## Instructions
+## Instructions to run locally
+
+Using Postgres database, you should create two databases: verxdb and verxdb_test
+> user: postgres
+> password: 123
 
 When you run the application for the first time, you should config database accessing the url "[/configdb](https://verxbp.herokuapp.com/configdb)". Then you can enjoy all the available features.
 
