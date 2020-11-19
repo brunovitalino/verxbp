@@ -21,9 +21,9 @@ A REST API for customer registration.
 
 To get your token, you should access the url "[/auth](https://verxbp.herokuapp.com/auth)" through POST method with content bellow:  
 
-> {  
->     email: admin@verx.com.br  
->     password: verx123  
+> {
+>   "email": "admin@verx.com.br",
+>   "password": "verx123"
 > }  
 
 ## Instructions to run locally
